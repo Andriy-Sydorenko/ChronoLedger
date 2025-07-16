@@ -1,6 +1,7 @@
 from typing import Any
 
 from fastapi import HTTPException, status
+from pydantic import SecretStr
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.user import User
@@ -29,7 +30,7 @@ class UserService:
     async def create_user(
         self,
         email: str,
-        password: str,
+        password: SecretStr,
         username: str | None = None,
         selected_fields: list[str] | None = None,
     ) -> User:
@@ -37,7 +38,7 @@ class UserService:
         if existing:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User already exists")
 
-        password_hash = ph.hash(password)
+        password_hash = ph.hash(password.get_secret_value())
         new_user = User(email=email, username=username, password_hash=password_hash)
         return await self.user_repo.create_user(new_user, selected_fields)
 
