@@ -59,6 +59,20 @@ ignore = [
 
     "TRY201", #Use `raise` without specifying exception name
 
+    "TD002", # Missing author in TODO
+
+    "TD003", # Missing issue link on the line following this TODO
+
+    "FIX002", # Line contains TODO, consider resolving the issue
+
+    "TRY003", # Avoid specifying long messages outside the exception class
+
+    "EM102", # EM102 Exception must not use an f-string literal, assign to variable first
+
+    "N813", # Camelcase `AuthService` imported as lowercase `auth_service`
+
+    "PGH004", # Use specific rule codes when using `noqa`
+
     "D203", # one-blank-line-before-class
     "D213", # multi-line-summary-second-line
 ]
