@@ -1,0 +1,61 @@
+[project]
+name = "chronoledger"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.16.4",
+    "argon2-cffi>=25.1.0",
+    "asyncpg>=0.30.0",
+    "fastapi>=0.116.1",
+    "psycopg2-binary>=2.9.10",
+    "pydantic-settings>=2.10.1",
+    "pyjwt>=2.10.1",
+    "sqlalchemy>=2.0.41",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "pytest>=8.4.1",
+    "ruff>=0.12.3",
+]
+
+[tool.ruff]
+line-length = 120
+exclude = [
+    "**/__init__.py",
+    "env/**",
+    "venv/**",
+]
+target-version = "py312"
+
+
+[tool.ruff.format]
+quote-style = "double"
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = 120
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    # Missing docstrings
+    "D100", "D101", "D102", "D103", "D107",
+    # Import sorting conflicts when using Ruff formatter instead of isort
+    "ISC001",
+
+    # Type annotation rules
+    "ANN",
+
+    # Formatting issues that are handled by formatters
+    "E702", "E231", "E241", "E251", "E202",
+
+    "D203", # one-blank-line-before-class
+    "D213", # multi-line-summary-second-line
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+lines-after-imports = 2
